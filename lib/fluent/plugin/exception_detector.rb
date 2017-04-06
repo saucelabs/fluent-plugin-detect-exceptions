@@ -226,10 +226,8 @@ module Fluent
     def combined_message
       combined = ''
       @messages.each do |m|
-        unless message.nil?
-          combined << $RS if !combined.empty? && !combined.end_with?("\n")
-          combined << m
-        end
+        combined << "\n" if !combined.empty? && !combined.end_with?("\n")
+        combined << m
       end
       combined
     end
