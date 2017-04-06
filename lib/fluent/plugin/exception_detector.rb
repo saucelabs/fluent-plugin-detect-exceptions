@@ -298,7 +298,7 @@ module Fluent
 
     def add(time_sec, record, message)
       if @messages.empty?
-        @first_record = record
+        @first_record = record unless @message_field.nil?
         @first_timestamp = time_sec
         @buffer_start_time = Time.now
       end
