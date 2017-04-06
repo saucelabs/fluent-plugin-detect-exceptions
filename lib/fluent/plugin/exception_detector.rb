@@ -226,8 +226,10 @@ module Fluent
     def combined_message
       combined = ''
       @messages.each do |m|
-        combined << $RS if !combined.empty? && !combined.end_with?("\n")
-        combined << m
+        unless message.nil?
+          combined << $RS if !combined.empty? && !combined.end_with?("\n")
+          combined << m
+        end
       end
       combined
     end
@@ -298,7 +300,7 @@ module Fluent
 
     def add(time_sec, record, message)
       if @messages.empty?
-        @first_record = record unless @message_field.nil?
+        @first_record = record
         @first_timestamp = time_sec
         @buffer_start_time = Time.now
       end
